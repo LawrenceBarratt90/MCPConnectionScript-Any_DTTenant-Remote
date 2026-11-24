@@ -80,6 +80,15 @@ curl -fsSL https://raw.githubusercontent.com/Dynatrace/dtctl/main/install.sh | s
 Rerun the command later to upgrade `dtctl`; the installer installs the latest
 release.
 
+If `DT_ENVIRONMENT` is already set in your current Bash shell, use this shorter
+command:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Dynatrace/dtctl/main/install.sh | sh &&
+dtctl auth login --context default --environment "$DT_ENVIRONMENT" &&
+dtctl doctor
+```
+
 ### Shared HTTP server
 
 Set the tenant URL and start the server:
