@@ -44,8 +44,15 @@ replace or configure the MCP server.
 On macOS or Linux, install the latest release:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/Dynatrace/dtctl/main/install.sh | sh
+export DTCTL_INSTALL_DIR="$HOME/.local/bin"
+mkdir -p "$DTCTL_INSTALL_DIR"
+curl -fsSL https://raw.githubusercontent.com/Dynatrace/dtctl/main/install.sh | DTCTL_INSTALL_DIR="$DTCTL_INSTALL_DIR" sh
+export PATH="$DTCTL_INSTALL_DIR:$PATH"
 ```
+
+This installs into your home directory and does not require `sudo`. The `PATH`
+change applies to the current shell; add `export PATH="$HOME/.local/bin:$PATH"`
+to your shell profile if you want it available in future terminals.
 
 In the same shell where `DT_ENVIRONMENT` is set, sign in and verify access:
 
@@ -72,7 +79,10 @@ then authenticates it against the tenant URL you provide and checks access:
 
 ```bash
 export DT_ENVIRONMENT="https://<tenant-id>.apps.dynatrace.com"
-curl -fsSL https://raw.githubusercontent.com/Dynatrace/dtctl/main/install.sh | sh &&
+export DTCTL_INSTALL_DIR="$HOME/.local/bin"
+mkdir -p "$DTCTL_INSTALL_DIR" &&
+curl -fsSL https://raw.githubusercontent.com/Dynatrace/dtctl/main/install.sh | DTCTL_INSTALL_DIR="$DTCTL_INSTALL_DIR" sh &&
+export PATH="$DTCTL_INSTALL_DIR:$PATH" &&
   dtctl auth login --context default --environment "$DT_ENVIRONMENT" &&
   dtctl doctor
 ```
@@ -84,7 +94,10 @@ If `DT_ENVIRONMENT` is already set in your current Bash shell, use this shorter
 command:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/Dynatrace/dtctl/main/install.sh | sh &&
+export DTCTL_INSTALL_DIR="$HOME/.local/bin"
+mkdir -p "$DTCTL_INSTALL_DIR" &&
+curl -fsSL https://raw.githubusercontent.com/Dynatrace/dtctl/main/install.sh | DTCTL_INSTALL_DIR="$DTCTL_INSTALL_DIR" sh &&
+export PATH="$DTCTL_INSTALL_DIR:$PATH" &&
 dtctl auth login --context default --environment "$DT_ENVIRONMENT" &&
 dtctl doctor
 ```
