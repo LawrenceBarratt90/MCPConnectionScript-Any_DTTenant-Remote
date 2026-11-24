@@ -1,0 +1,19 @@
+{
+  "servers": {
+    "dynatrace-http": {
+      "type": "http",
+      "url": "http://127.0.0.1:3000",
+      "headers": {
+        "Authorization": "Bearer ${input:dynatrace-mcp-bearer-token}"
+      }
+    }
+  },
+  "inputs": [
+    {
+      "id": "dynatrace-mcp-bearer-token",
+      "type": "promptString",
+      "description": "Dynatrace MCP bearer token",
+      "password": true
+    }
+  ]
+}

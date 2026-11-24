@@ -1,0 +1,4 @@
+.dynatrace-mcp/
+.env
+*.log
+server.pid
