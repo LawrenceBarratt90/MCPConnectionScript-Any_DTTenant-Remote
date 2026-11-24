@@ -34,6 +34,52 @@ export DT_ENVIRONMENT="https://<tenant-id>.apps.dynatrace.com"
 
 Fully quit and restart Claude Desktop after the script completes.
 
+## Optional: add the official `dtctl` CLI
+
+[`dtctl`](https://github.com/Dynatrace/dtctl) complements this MCP server with a
+Dynatrace CLI for DQL, workflows, dashboards, and other platform resources. It
+is a separate client and authenticates independently; installing it does not
+replace or configure the MCP server.
+
+On macOS or Linux, install the latest release:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Dynatrace/dtctl/main/install.sh | sh
+```
+
+In the same shell where `DT_ENVIRONMENT` is set, sign in and verify access:
+
+```bash
+dtctl auth login --context default --environment "$DT_ENVIRONMENT"
+dtctl doctor
+dtctl query "fetch logs | limit 10"
+```
+
+To install the `dtctl` Agent Skill for a supported AI client:
+
+```bash
+dtctl skills install
+```
+
+The Agent Skill explains how to operate the CLI; this repository's
+`dynatrace-mcp` skill describes its MCP connection. Use either or both according
+to the task and the tools available in your client. See the upstream
+[installation guide](https://github.com/Dynatrace/dtctl/blob/main/docs/INSTALLATION.md)
+for Windows, Homebrew, and other install options.
+
+Already using this MCP setup? This Bash command installs or upgrades `dtctl`,
+then authenticates it against the tenant URL you provide and checks access:
+
+```bash
+export DT_ENVIRONMENT="https://<tenant-id>.apps.dynatrace.com"
+curl -fsSL https://raw.githubusercontent.com/Dynatrace/dtctl/main/install.sh | sh &&
+  dtctl auth login --context default --environment "$DT_ENVIRONMENT" &&
+  dtctl doctor
+```
+
+Rerun the command later to upgrade `dtctl`; the installer installs the latest
+release.
+
 ### Shared HTTP server
 
 Set the tenant URL and start the server:

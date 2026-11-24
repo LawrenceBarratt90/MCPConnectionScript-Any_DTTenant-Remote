@@ -21,3 +21,11 @@ Use this skill when the user asks about Dynatrace observability data or wants to
 3. Prefer DQL for structured searches across logs, metrics, spans, events, and problems.
 4. Keep queries scoped by tenant and time range.
 5. Summarize findings, include relevant entity IDs, timestamps, and query evidence, and distinguish observations from hypotheses.
+
+## Optional CLI companion
+
+The official [`dtctl`](https://github.com/Dynatrace/dtctl) CLI is a separate,
+complementary interface. Use it when available for supported CLI operations,
+and use this MCP server for its exposed tools. `dtctl` has its own authentication
+contexts; verify the active context and tenant before querying. Do not assume
+its selected context is the same as this MCP server's `DT_ENVIRONMENT`.
